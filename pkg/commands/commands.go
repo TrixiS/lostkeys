@@ -11,8 +11,8 @@ import (
 )
 
 func Set(ctx *command_context.CommandContext) error {
-	if ctx.CLIContext.NArg() < 2 {
-		return fmt.Errorf("provide a key and a value")
+	if ctx.CLIContext.NArg() < 1 {
+		return fmt.Errorf("provide a key")
 	}
 
 	key := ctx.CLIContext.Args().Get(0)
@@ -28,7 +28,13 @@ func Set(ctx *command_context.CommandContext) error {
 			return err
 		}
 
-		return bucket.Put([]byte(key), []byte(value))
+		keyBytes := []byte(key)
+
+		if value == "" {
+			return bucket.Delete(keyBytes)
+		}
+
+		return bucket.Put(keyBytes, []byte(value))
 	})
 
 	if err != nil {

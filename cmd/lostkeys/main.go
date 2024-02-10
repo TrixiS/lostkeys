@@ -45,18 +45,20 @@ func main() {
 	app := &cli.App{
 		Commands: []*cli.Command{
 			{
-				Name:    "set",
-				Aliases: []string{"s"},
-				Usage:   "[key] [value]",
-				Args:    true,
-				Action:  contextProvider.Wraps(commands.Set),
+				Name:      "set",
+				Aliases:   []string{"s"},
+				Usage:     "set value for a key or remove it if empty",
+				UsageText: "[key] <value>",
+				Args:      true,
+				Action:    contextProvider.Wraps(commands.Set),
 			},
 			{
-				Name:    "get",
-				Aliases: []string{"g"},
-				Usage:   "[key]",
-				Args:    true,
-				Action:  contextProvider.Wraps(commands.Get),
+				Name:      "get",
+				Aliases:   []string{"g"},
+				Usage:     "get value for a key",
+				UsageText: "[key]",
+				Args:      true,
+				Action:    contextProvider.Wraps(commands.Get),
 			},
 			{
 				Name:    "list",
@@ -67,8 +69,8 @@ func main() {
 			{
 				Name:      "clipboard",
 				Aliases:   []string{"cb"},
-				Usage:     "[key]",
-				UsageText: "copy key value to clipboard",
+				Usage:     "copy key value to clipboard",
+				UsageText: "[key]",
 				Action:    contextProvider.Wraps(commands.Clipboard),
 			},
 		},
