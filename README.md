@@ -1,5 +1,7 @@
 # lostkeys
 
+`lostkeys --help`
+
 ## Set value
 
 `lostkeys set key value`
